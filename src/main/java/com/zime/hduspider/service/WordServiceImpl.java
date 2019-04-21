@@ -16,7 +16,7 @@ public class WordServiceImpl implements WordService
     public List<Word> getAll()
     {
         WordExample wordExample=new WordExample();
-        wordExample.setOrderByClause("English");
+        wordExample.setOrderByClause("Frequency");
         return wordMapper.selectByExample(wordExample);
     }
 }

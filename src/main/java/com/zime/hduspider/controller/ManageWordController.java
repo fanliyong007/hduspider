@@ -22,7 +22,7 @@ public class ManageWordController
     public Msg getALL(@RequestParam(value = "pn", defaultValue = "1") Integer pageNum)
     {
         //在查询之前调用静态方法设置起始页和页面大小
-        PageHelper.startPage(pageNum, 100);
+        PageHelper.startPage(pageNum, 100,"Frequency desc");
         //startPage后面紧跟着的查询就是分页查询
         List<Word> words=wordService.getAll();
         //使用PageInfo包装查询后的结果，并将pageInfo存入map中

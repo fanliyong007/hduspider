@@ -1,135 +1,96 @@
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://v4.bootcss.com/docs/4.0/examples/grid/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="fly">
+    <link rel="icon" href="https://v4.bootcss.com/favicon.ico">
 
+    <title>HDUOJ 爬虫工具</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Grid Template for Bootstrap</title>
     <!-- Bootstrap core CSS -->
     <link href="" th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-    <link href="" th:href="@{css/grid.css}" rel="stylesheet">
+    <link href="" th:href="@{css/pricing.css}" rel="stylesheet">
+    <!--引用Bootstrap-->
     <script th:src="@{js/jquery.js}"></script>
+    <!--引用jQuery-->
     <script th:src="@{js/bootstrap.js}"></script>
-    <script th:src="@{js/popper.js}"></script>
 </head>
 
 <body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+<h5 class="my-0 mr-md-auto font-weight-normal">ZIME</h5>
+</div>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Design By fly</h1>
+    <p class="lead">最棒的HDUOJ辅助工具</p>
+</div>
+
 <div class="container">
-
-    <h1>Bootstrap grid examples</h1>
-    <p class="lead">Basic grid layouts to get you familiar with building within the Bootstrap grid system.</p>
-
-    <h3>Five grid tiers</h3>
-    <p>There are five tiers to the Bootstrap grid system, one for each range of devices we support. Each tier starts at a minimum viewport size and automatically applies to the larger devices unless overridden.</p>
-
-    <div class="row">
-        <div class="col-4">.col-4</div>
-        <div class="col-4">.col-4</div>
-        <div class="col-4">.col-4</div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-4">.col-sm-4</div>
-        <div class="col-sm-4">.col-sm-4</div>
-        <div class="col-sm-4">.col-sm-4</div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">.col-md-4</div>
-        <div class="col-md-4">.col-md-4</div>
-        <div class="col-md-4">.col-md-4</div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-4">.col-lg-4</div>
-        <div class="col-lg-4">.col-lg-4</div>
-        <div class="col-lg-4">.col-lg-4</div>
-    </div>
-
-    <div class="row">
-        <div class="col-xl-4">.col-xl-4</div>
-        <div class="col-xl-4">.col-xl-4</div>
-        <div class="col-xl-4">.col-xl-4</div>
-    </div>
-
-    <h3>Three equal columns</h3>
-    <p>Get three equal-width columns <strong>starting at desktops and scaling to large desktops</strong>. On mobile devices, tablets and below, the columns will automatically stack.</p>
-    <div class="row">
-        <div class="col-md-4">.col-md-4</div>
-        <div class="col-md-4">.col-md-4</div>
-        <div class="col-md-4">.col-md-4</div>
-    </div>
-
-    <h3>Three unequal columns</h3>
-    <p>Get three columns <strong>starting at desktops and scaling to large desktops</strong> of various widths. Remember, grid columns should add up to twelve for a single horizontal block. More than that, and columns start stacking no matter the viewport.</p>
-    <div class="row">
-        <div class="col-md-3">.col-md-3</div>
-        <div class="col-md-6">.col-md-6</div>
-        <div class="col-md-3">.col-md-3</div>
-    </div>
-
-    <h3>Two columns</h3>
-    <p>Get two columns <strong>starting at desktops and scaling to large desktops</strong>.</p>
-    <div class="row">
-        <div class="col-md-8">.col-md-8</div>
-        <div class="col-md-4">.col-md-4</div>
-    </div>
-
-    <h3>Full width, single column</h3>
-    <p class="text-warning">No grid classes are necessary for full-width elements.</p>
-
-    <hr>
-
-    <h3>Two columns with two nested columns</h3>
-    <p>Per the documentation, nesting is easy—just put a row of columns within an existing column. This gives you two columns <strong>starting at desktops and scaling to large desktops</strong>, with another two (equal widths) within the larger column.</p>
-    <p>At mobile device sizes, tablets and down, these columns and their nested columns will stack.</p>
-    <div class="row">
-        <div class="col-md-8">
-            .col-md-8
-            <div class="row">
-                <div class="col-md-6">.col-md-6</div>
-                <div class="col-md-6">.col-md-6</div>
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">查看单词</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>最全</li>
+                    <li>最快速</li>
+                    <li>最准确</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary"  id="show">Show English</button>
             </div>
         </div>
-        <div class="col-md-4">.col-md-4</div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">备份AC代码</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>无烦恼一键备份</li>
+                    <li>速度极快</li>
+                    <li>再无代码丢失烦恼</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-primary" >开始备份</button>
+            </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">离线题目下载</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>快速</li>
+                    <li>安全</li>
+                    <li>准确</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-primary">下载</button>
+            </div>
+        </div>
     </div>
 
-    <hr>
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+            <div class="col-12 col-md">
+                <img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+                <small class="d-block mb-3 text-muted">Bulid by Fly© 2019.5.1</small>
+            </div>
+        </div>
+    </footer>
+</div>
 
-    <h3>Mixed: mobile and desktop</h3>
-    <p>The Bootstrap v4 grid system has five tiers of classes: xs (extra small), sm (small), md (medium), lg (large), and xl (extra large). You can use nearly any combination of these classes to create more dynamic and flexible layouts.</p>
-    <p>Each tier of classes scales up, meaning if you plan on setting the same widths for xs and sm, you only need to specify xs.</p>
-    <div class="row">
-        <div class="col-12 col-md-8">.col-12 .col-md-8</div>
-        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-    </div>
-    <div class="row">
-        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-    </div>
-    <div class="row">
-        <div class="col-6">.col-6</div>
-        <div class="col-6">.col-6</div>
-    </div>
 
-    <hr>
-
-    <h3>Mixed: mobile, tablet, and desktop</h3>
-    <p></p>
-    <div class="row">
-        <div class="col-12 col-sm-6 col-lg-8">.col-12 .col-sm-6 .col-lg-8</div>
-        <div class="col-6 col-lg-4">.col-6 .col-lg-4</div>
-    </div>
-    <div class="row">
-        <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
-        <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
-        <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
-    </div>
-
-</div> <!-- /container -->
-<script>
-    
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:inline="javascript">
+    $(function(){
+        $("#show").click(function(){
+            window.location.href ="/show";
+        });
+    });
 </script>
 </body></html>

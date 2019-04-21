@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://v4.bootcss.com/docs/4.0/examples/grid/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="fly">
+    <link rel="icon" href="https://v4.bootcss.com/favicon.ico">
+
+    <title>Show English</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="" th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+    <!--引用Bootstrap-->
+    <script th:src="@{js/jquery.js}"></script>
+    <!--引用jQuery-->
+    <script th:src="@{js/bootstrap.js}"></script>
+</head>
+
+<body>
+<div class="container">
+    <!-- Insert Delete Button-->
+    <!-- Student Data -->
+    <div class="row">
+        <table class="table table-hover" id="mytable">
+            <thead>
+
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- Paging Info -->
+    <div class="row" id="pageInfo">
+        <div class="col-md-6 btn btn-sm " id="page_info_area"></div>
+        <div class="col-md-6 btn btn-sm " id="page_nav_area"></div>
+    </div>
+</div><!-- /container -->
+<script th:inline="javascript">
+    showWordPage(1);
+    var totalPage;
+    var currPage;
+    var message;
+    function showWord()
+    {
+        $("#mytable thead").empty();
+        $("<tr></tr>").append($("<th></th>").append("英语")).append($("<th></th>").append("中文翻译")).append($("<th></th>").append("出现频率"))
+            .append($("<th></th>"))
+            .appendTo("#mytable thead");
+    }
+    function showWordPage(n) {
+        $.get({
+            url: "/api/word",
+            data: "pn=" + n,
+            success: function (result) {
+                message=result;
+                showWord();
+                //显示单词数据
+                build_word_table(result);
+                //显示分页信息
+                build_page_info(result.data.word);
+                //显示页面的导航信息
+                build_page_nav(result.data.word, showWordPage);
+            }
+        });
+    }
+    function build_word_table(result) {
+        $("#mytable tbody").empty();
+        var myword =message.data.word.list;
+        $.each(myword, function (index, item) {
+            var tmp=$("<a></a>").append(item.english).attr("href", "https://translate.google.cn/#view=home&op=translate&sl=en&tl=zh-CN&text="+item.english);
+            var English = $("<td></td>").append(tmp);
+            var Chinese = $("<td></td>").append(item.chinese);
+            var Frequency = $("<td></td>").append(item.frequency);
+            $("<tr></tr>").append(English).append(Chinese).append(Frequency)
+                .appendTo("#mytable tbody");
+            $("<tr></tr>").append
+        })
+    }
+    function build_page_info(result) {
+        $("#page_info_area").empty();
+        $("#page_info_area").append(
+            "当前第" + result.pageNum + "页/总共"
+            + result.pages + "页，总记录为"
+            + result.total + "条");
+        totalPage = result.pageSize;
+        currPage = result.pageNum;
+    }
+    function build_page_nav(result, func) {
+        $("#page_nav_area").empty();
+        var ul = $("<ul></ul>").addClass("pagination");
+        var firstPageLi = $("<li></li>").append(
+            $("<a></a>").append("首页").attr("href", "#"));
+        var previousPageLi = $("<li></li>").append(
+            $("<a></a>").append("&laquo;").attr("href", "#"));
+
+        if (result.hasPreviousPage == false) {
+            firstPageLi.addClass("disabled");
+            previousPageLi.addClass("disabled");
+        } else {
+            firstPageLi.click(function () {
+                func(1);
+            });
+            previousPageLi.click(function () {
+                func(result.pageNum - 1);
+            });
+        }
+        var nextPageLi = $("<li></li>").append(
+            $("<a></a>").append("&raquo;").attr("href", "#"));
+        var lastPageLi = $("<li></li>").append(
+            $("<a></a>").append("末页").attr("href", "#"));
+        if (result.hasNextPage == false) {
+            nextPageLi.addClass("disabled");
+            lastPageLi.addClass("disabled");
+        } else {
+            nextPageLi.click(function () {
+                func(result.pageNum + 1);
+            });
+            lastPageLi.click(function () {
+                func(result.pages);
+            });
+        }
+        ul.append(firstPageLi.addClass("btn btn-sm btn-outline-secondary")).append(previousPageLi.addClass("btn btn-sm btn-outline-secondary"));
+        $.each(result.navigatepageNums, function (index, item) {
+            var numLi = $("<li></li>").append(
+                $("<a></a>").append(item).attr("href", "#"));
+            if (result.pageNum == item) {
+                numLi.addClass("active");
+            }
+            numLi.click(function () {
+                func(item);
+            });
+            ul.append(numLi.addClass("btn btn-sm btn-outline-secondary"));
+        });
+        ul.append(nextPageLi.addClass("btn btn-sm btn-outline-secondary")).append(lastPageLi.addClass("btn btn-sm btn-outline-secondary"));
+        var navElement = $("<nav></nav>").append(ul).appendTo(
+            "#page_nav_area");
+    }
+</script>
+</body></html>
