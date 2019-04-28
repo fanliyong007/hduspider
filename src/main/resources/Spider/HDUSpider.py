@@ -1,12 +1,25 @@
 # coding = utf-8
-import os
 import re
+import os
+import shutil
+import zipfile
+from os.path import join, getsize
 from selenium import webdriver
-browser = webdriver.Chrome()
-# username=input("请输入账户名")#读入账户
-# userpass=input("请输入密码")#读入密码
-username="fanliyong007"
-userpass="fanliyong8880+"
+option = webdriver.ChromeOptions()
+option.add_argument("headless")
+browser = webdriver.Chrome(chrome_options=option)
+def zip_file(src_dir):
+    zip_name = src_dir +'.zip'
+    z = zipfile.ZipFile(zip_name,'w',zipfile.ZIP_DEFLATED)
+    for dirpath, dirnames, filenames in os.walk(src_dir):
+        fpath = dirpath.replace(src_dir,'')
+        fpath = fpath and fpath + os.sep or ''
+        for filename in filenames:
+            z.write(os.path.join(dirpath, filename),fpath+filename)
+            print ('==压缩成功==')
+    z.close()
+username=input("")#读入账户
+userpass=input("")#读入密码
 browser.get("http://acm.hdu.edu.cn/userstatus.php?user="+username)#取得当前用户题目集
 queXpath="/html/body/table/tbody/tr[4]/td/table/tbody/tr/td/p[3]"#题目集xpath路径
 browser.find_element_by_name("username").send_keys(username)
@@ -27,9 +40,10 @@ for queNum in Myque:
             browser.switch_to_window(h)
             code = browser.find_element_by_xpath("/html/body/table/tbody/tr[4]/td/div/div[2]/pre")
             print(code.text)
-            f=open('D:\Spider\HDUACM\\'+queNum,'w')
+            f=open('D:\hduspider\src\main\resources\Spider\tmp\\'+queNum,'w')
             f.write(code.text)
             f.close()
             browser.close()
             browser.switch_to_window(hander)
+zip_file("D:\hduspider\src\main\resources\Spider\tmp\\")
 browser.quit()

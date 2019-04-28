@@ -54,7 +54,7 @@
                     <li>速度极快</li>
                     <li>再无代码丢失烦恼</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-primary" >开始备份</button>
+                <button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#myModal" >开始备份</button>
             </div>
         </div>
         <div class="card mb-4 box-shadow">
@@ -72,11 +72,45 @@
         </div>
     </div>
 
+
+    <!--备份代码模态框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="saveCodeModaModalLabel">备份代码</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用户名</label>
+                            <div class="col-sm-10">
+                                <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                                <input name="username" type="text" class="form-control" placeholder="username" aria-describedby="sizing-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <span  class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input name="password" type="password" class="form-control" placeholder="*********" aria-describedby="sizing-addon1">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="Go">Go</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
             <div class="col-12 col-md">
                 <img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-                <small class="d-block mb-3 text-muted">Bulid by Fly© 2019.5.1</small>
+                <small class="d-block mb-3 text-muted">© 2019.5.1</small>
             </div>
         </div>
     </footer>
@@ -87,9 +121,33 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script th:inline="javascript">
+    $(function () {
+        $("#savecode").click(function(){
+            alert("test")
+            $("#identifier").modal();
+        });
+
+    });
     $(function(){
         $("#show").click(function(){
             window.location.href ="/show";
+        });
+    });
+    $("#Go").click(function () {
+        $.ajax({
+            url: "/api/save",
+            type: "POST",
+            data: $("#myModal form").serialize(),
+            success: function (result) {
+                if (result.code == 101) {
+                    $("#myModal").modal('hide');
+                    alert("开始运行");
+                    window.location.href ="/wait";
+                }
+                if (result.code == 102) {
+                    alert("提交任务失败");
+                }
+            }
         });
     });
 </script>
