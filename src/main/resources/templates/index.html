@@ -67,7 +67,7 @@
                     <li>安全</li>
                     <li>准确</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-primary">下载</button>
+                <button type="button" class="btn btn-lg btn-block btn-primary" id="question">下载</button>
             </div>
         </div>
     </div>
@@ -134,6 +134,7 @@
         });
     });
     $("#Go").click(function () {
+        alert("开始运行");
         $.ajax({
             url: "/api/save",
             type: "POST",
@@ -141,7 +142,7 @@
             success: function (result) {
                 if (result.code == 101) {
                     $("#myModal").modal('hide');
-                    alert("开始运行");
+                    alert("处理成功");
                     window.location.href ="/wait";
                 }
                 if (result.code == 102) {
@@ -149,6 +150,9 @@
                 }
             }
         });
+    });
+    $("#question").click(function () {
+        window.location.href ="/api/question";
     });
 </script>
 </body></html>
